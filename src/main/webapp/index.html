@@ -116,7 +116,7 @@
 	<script>  
 		function deleteFilm(obj){
 			$.ajax({
-				url : "/film/deleteFilm.action",
+				url : "film/deleteFilm.action",
 				type : "GET",
 				dataType : "json",
 				data : {
@@ -156,7 +156,7 @@
             
             queryInfo = $.extend({}, defaultArg, queryInfo);
             $.ajax({
-                url: "/film/queryFilm.action",
+                url: "film/queryFilm.action",
                 type: "GET",
                 dataType: "json",
                 data: queryInfo,
