@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>添加电影</title>
 <link rel="stylesheet"
 	href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -18,52 +18,59 @@
 				<table class="pagination table">
 					<thead>
 						<tr>
-							<th colspan="1"><p align="center">电影信息添加</p></th>
+							<th colspan="1"><p align="center"></p></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<form class="form-horizontal" role="form" action="film/addFilmSave.action">
-									<input type="hidden" id="langId" name="film.languageId" />
-									<div class="form-group">
-										<label for="firstname" class="col-sm-4 control-label">Title</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" id="filmTitle"
-												name="film.title" placeholder="请输入Title">
-										</div>
+								<div class="pagination panel panel-primary">
+									<div class=" panel-heading">
+										<h3 class="panel-title">
+											<p align="center">电影信息添加</p>
+										</h3>
 									</div>
-									<div class="form-group">
-										<label for="lastname" class="col-sm-4 control-label">Description</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" id="description"
-												name="film.description" placeholder="请输入Description">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="lastname" class="col-sm-4 control-label">Language</label>
-										<div class="col-sm-7">
-											<select id="languagesSelect" class="form-control">
-												<option>请选择</option>
-											</select>
-										</div>
-									</div>
+									<div class="panel-body">
+										<form class="form-horizontal" role="form"
+											action="film/addFilmSave.action">
+											<input type="hidden" id="langId" name="film.languageId" />
+											<div class="form-group">
+												<label for="firstname" class="col-sm-4 control-label">Title</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="filmTitle"
+														name="film.title" placeholder="请输入Title">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="lastname" class="col-sm-4 control-label">Description</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="description"
+														name="film.description" placeholder="请输入Description">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="lastname" class="col-sm-4 control-label">Language</label>
+												<div class="col-sm-7">
+													<select id="languagesSelect" class="form-control">
+														<option>请选择</option>
+													</select>
+												</div>
+											</div>
 
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10">
-											<button type="button" onclick="cancle()"
-												class="btn btn-default">取消</button>
-											<button type="button" onclick="sure()"
-												class="btn btn-default">确定</button>
-										</div>
-									</div>
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+													<button type="button" onclick="cancle()"
+														class="col-sm-4 btn btn-default">取消</button>
+													<button type="button" onclick="sure()"
+														class="col-sm-offset-2 col-sm-4 btn btn-default">确定</button>
+												</div>
+											</div>
 
-								</form>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+										</form>
+									</div>
+								</div>
 			</div>
+			</td>
 			<div class="col-md-4 column"></div>
 		</div>
 		<script type="text/javascript">
