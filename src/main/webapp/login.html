@@ -24,7 +24,6 @@
 		    return result;
 		}
 	function login() {
-		alert(getContextPath());
 		userInfo = {
 			userName : $("#userName").val()
 		}
@@ -37,6 +36,7 @@
 						if (data == "succeed") {
 							location.href = "index.html";
 						} else {
+							alert(data);
 							location.href = "login.html";
 						}
 					}
