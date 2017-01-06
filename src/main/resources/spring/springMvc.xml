@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                            http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:component-scan base-package="com.constroller" />
+	<!-- <mvc:default-servlet-handler /> -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<!--json处理 -->   
+			<bean   
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters> 
+	</mvc:annotation-driven>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <property name="prefix" value="/WEB-INF/pages/" /> -->
+		<property name="suffix" value=".html" />
+	</bean>  
+	<!-- 资源映射 111 -->
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+	<!-- 拦截器配置 -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="com.interceptor.LoginInterceptor"></bean> </mvc:interceptor> </mvc:interceptors> -->
+</beans>

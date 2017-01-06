@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/jquerySession.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css-v=4.4.0.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+<link href="css/login.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+	/* var jq = jQuery.noConflict(); //自定义一个比较短快捷方式
+	 jq('document').ready(function () {
+	 if(jq.session.get('loginError')!=null){
+	 alert(jq.session.get('loginError'));
+	 }
+	 }); */
+	 function getContextPath() {
+		    var pathName = document.location.pathname;
+		    var index = pathName.substr(1).indexOf("/");
+		    var result = pathName.substr(0,index+1);
+		    return result;
+		}
+	function login() {
+		alert(getContextPath());
+		userInfo = {
+			userName : $("#userName").val()
+		}
+		$.ajax({
+					url : "/Exam-12790-20170106-1/login.action",
+					type : "GET",
+					dataType : "json",
+					data : userInfo,
+					success : function(data) {
+						if (data == "succeed") {
+							location.href = "http://localhost:8080/Exam-12790-20170106-1/index.html";
+						} else {
+							alert(data);
+							location.href = "http://localhost:8080/Exam-12790-20170106-1/login.html";
+						}
+					}
+				})
+	}
+</script>
+
+</head>
+<body class="signin">
+	<div class="signinpanel">
+		<div class="row">
+			<div class="col-sm-7">
+				<div class="signin-info">
+					<div class="logopanel m-b">
+						<h1>[ H+ ]</h1>
+					</div>
+					<div class="m-b"></div>
+				</div>
+			</div>
+			<div class="col-sm-5">
+				<!-- <form method="post" action="login.action"> -->
+				<h4 class="no-margins">登录：</h4>
+				<p class="m-t-md">
+				<h3>登录服务</h3>
+				</p>
+				<input type="text" class="form-control uname" id="userName"
+					placeholder="用户名" /> <input type="password"
+					class="form-control pword m-b" name="pwd" placeholder="密码" /> <a
+					href="">忘记密码了？</a>
+				<button class="btn btn-success btn-block" onclick="login()">登录</button>
+				<!-- </form> -->
+			</div>
+		</div>
+		<div class="signup-footer">
+			<div class="pull-left"></div>
+		</div>
+	</div>
+</body>
+<!-- <script src="js/page.js"></script> -->
+</html>

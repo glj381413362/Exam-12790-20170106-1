@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-4 column"></div>
+			<div class="col-md-4 column">
+				<table class="pagination table">
+					<thead>
+						<tr>
+							<th colspan="1"><p align="center">电影信息修改</p></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<form class="form-horizontal" role="form" action="film/updateFilmSave.action">
+								<input type="hidden" id="langId" name="langId" />
+								<input type="hidden" id="filmId" name="film.filmId" />
+									<div class="form-group">
+										<label for="firstname" class="col-sm-4 control-label">Title</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="filmTitle" name="film.title"
+												placeholder="请输入Title">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="lastname" class="col-sm-4 control-label">Description</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="description" name="film.description"
+												placeholder="请输入Description">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="lastname" class="col-sm-4 control-label">Language</label>
+										<div class="col-sm-7">
+											<select id="languagesSelect" class="form-control">
+												<option>请选择</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+										<button type="button" onclick="cancle()" class="btn btn-default">取消</button>
+											<button type="button" onclick="sure()" class="btn btn-default">确定</button>
+										</div>
+									</div>
+
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4 column"></div>
+		</div>
+		<script type="text/javascript">
+			$('document').ready(function() {
+				var obj = {
+					url : "/Exam-12790-20170106-1/film/updateFilmAjax.action",
+					data : {
+						filmId : getUrlParam("filmId")
+					}
+				}
+				
+				//执行ajaxFun(obj)进行数据回显
+				ajaxFun(obj);
+				
+				$("#languagesSelect").change(function(){
+					$("#langId").attr('value',$("#languagesSelect option:selected").val());
+					console.log($("#languagesSelect option:selected").val());
+				})
+				
+			})
+			
+			function cancle(){
+				location.href = "http://localhost:8080/Exam-12790-20170106-1/index.html";
+			}
+			function sure(){
+			    $("#filmId").attr('value',getUrlParam("filmId"));
+				//回头修改 placeholder
+				/* alert($("#filmTitle").val().length==0);
+				if($("#filmTitle").val().length==0)
+				{
+					$("#filmTitle").val($("#filmTitle").attr('placeholder'));
+				}
+				if($("#description").val().length==0)
+				{
+					alert($("#description").attr('placeholder'));
+					$("#description").val($("#description").attr('placeholder'));
+				} */
+				$("form").submit();
+			}
+			
+			//获取url中的参数
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if (r != null)
+					return unescape(r[2]);
+				return null; //返回参数值
+			}
+			function ajaxFun(obj) {
+				$.ajax({
+					url : obj.url,
+					type : "GET",
+					dataType : "json",
+					data : obj.data,
+					success : function(data) {
+						if (data != null) {
+							$("#filmTitle").attr('value',data.film.title);
+							$("#description").attr('value',data.film.description);
+							$("#languagesSelect option").remove();//移除所以option
+							for(var obj of data.languages){
+								$("#languagesSelect").append("<option value='"+obj.languageId+"'>"+obj.name+"</option>");
+							}
+						} 
+					}
+				})
+			}
+		</script>
+	</div>
+</body>
+</html>

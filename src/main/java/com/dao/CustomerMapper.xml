@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.model.Customer" >
+    <id column="customer_id" property="customerId" jdbcType="SMALLINT" />
+    <result column="store_id" property="storeId" jdbcType="TINYINT" />
+    <result column="first_name" property="firstName" jdbcType="VARCHAR" />
+    <result column="last_name" property="lastName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address_id" property="addressId" jdbcType="SMALLINT" />
+    <result column="active" property="active" jdbcType="TINYINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+  </resultMap> 
+	<sql id="where_List">
+		<if test="customerId != null ">
+            <![CDATA[ and t.customer_id = #{customerId,jdbcType=SMALLINT} ]]>
+		</if>
+		<if test="storeId != null ">
+            <![CDATA[ and t.store_id = #{storeId,jdbcType=TINYINT} ]]>
+		</if>
+		<if test="firstName != null and firstName !=''">
+            <![CDATA[ and t.first_name = #{firstName,jdbcType=VARCHAR} ]]>
+		</if>
+		<if test="lastName != null and lastName !=''">
+            <![CDATA[ and t.last_name = #{lastName,jdbcType=VARCHAR} ]]>
+		</if>
+		<if test="email != null and email !=''">
+            <![CDATA[ and t.email = #{email,jdbcType=VARCHAR} ]]>
+		</if>
+		<if test="addressId != null ">
+            <![CDATA[ and t.address_id = #{addressId,jdbcType=SMALLINT} ]]>
+		</if>
+		<if test="active != null ">
+            <![CDATA[ and t.active = #{active,jdbcType=TINYINT} ]]>
+		</if>
+		<if test="createDate != null ">
+            <![CDATA[ and t.create_date = #{createDate,jdbcType=TIMESTAMP} ]]>
+		</if>
+		<if test="lastUpdate != null ">
+            <![CDATA[ and t.last_update = #{lastUpdate,jdbcType=TIMESTAMP} ]]>
+		</if>
+		<if test="strSqlWhere != null" >
+            ${strSqlWhere} 
+		</if>
+	</sql>
+  <sql id="Base_Column_List" >
+    customer_id,store_id,first_name,last_name,email,address_id,active,create_date,last_update  </sql>
+	<select id="getByEntity" parameterType="com.model.Customer" resultMap="BaseResultMap" >
+		select 
+ <include refid="Base_Column_List" /> 
+  from customer t  
+		<where> 
+			<include refid="where_List" />
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.LanguageMapper">
+	<resultMap id="BaseResultMap" type="com.model.Language">
+		<id column="language_id" property="languageId" jdbcType="TINYINT" />
+		<result column="name" property="name" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="where_List">
+		<if test="languageId != null ">
+            <![CDATA[ and t.language_id = #{languageId,jdbcType=TINYINT} ]]>
+		</if>
+		<if test="name != null and name !=''">
+            <![CDATA[ and t.name = #{name,jdbcType=CHAR} ]]>
+		</if>
+		<if test="lastUpdate != null ">
+            <![CDATA[ and t.last_update = #{lastUpdate,jdbcType=TIMESTAMP} ]]>
+		</if>
+		<if test="strSqlWhere != null">
+			${strSqlWhere}
+		</if>
+	</sql>
+
+	<select id="selectLanguageList" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM Language
+	</select>
+</mapper>

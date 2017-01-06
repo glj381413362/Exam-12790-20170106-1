@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.FilmMapper">
+	<resultMap id="BaseResultMap" type="com.model.Film">
+		<id column="film_id" property="filmId" jdbcType="SMALLINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="LONGVARBINARY" />
+		<result column="release_year" property="releaseYear" jdbcType="DATE" />
+		<result column="language_id" property="languageId" jdbcType="TINYINT" />
+		<result column="original_language_id" property="originalLanguageId"
+			jdbcType="TINYINT" />
+		<result column="rental_duration" property="rentalDuration"
+			jdbcType="TINYINT" />
+		<result column="rental_rate" property="rentalRate" jdbcType="DECIMAL" />
+		<result column="length" property="length" jdbcType="SMALLINT" />
+		<result column="replacement_cost" property="replacementCost"
+			jdbcType="DECIMAL" />
+		<result column="rating" property="rating" jdbcType="CHAR" />
+		<result column="special_features" property="specialFeatures"
+			jdbcType="CHAR" />
+		<result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+    <resultMap id="FilmVoResultMap" type="com.model.FilmVo">
+		<id column="film_id" property="film.filmId" jdbcType="SMALLINT" />
+		<result column="title" property="film.title" jdbcType="VARCHAR" />
+		<result column="description" property="film.description" jdbcType="LONGVARBINARY" />
+		<result column="language_name" property="language.name" jdbcType="VARCHAR" />
+		</resultMap>
+	<resultMap id="filmInfo" type="com.model.FilmVo">
+		<id column="film_id" property="film.filmId" jdbcType="SMALLINT" />
+		<result column="title" property="film.title" jdbcType="VARCHAR" />
+		<result column="description" property="film.description"
+			jdbcType="LONGVARBINARY" />
+		<result column="language_name" property="language.name"
+			jdbcType="VARCHAR" />
+		<collection property="languages" ofType="com.model.Language">
+			<id property="languageId" column="language_id" />
+			<result property="name" column="name" />
+		</collection>
+	</resultMap>
+	<!-- <resultMap id="languageResultMap" type="com.model.Language"> <id property="languageId" 
+		column="language_id" /> <result property="name" column="name" /> </resultMap> -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+		SET
+		FOREIGN_KEY_CHECKS = 0;
+		delete from film where film_id =
+		#{filmId,jdbcType=SMALLINT} ;
+		SET FOREIGN_KEY_CHECKS = 1 ;
+	</delete>
+	<select id="selectCount" parameterType="com.model.Film"
+		resultType="int">
+		SELECT COUNT(1)
+		FROM Film
+		WHERE
+		1=1
+		<if test="title !=null">
+			AND title LIKE CONCAT('%', CONCAT(#{title}, '%'))
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="filmInfo"
+		parameterType="java.lang.Short">
+		select
+		film_id,title,description,l.`name` language_name
+		from film
+		f,`language` l where l.language_id=f.language_id
+		and film_id =
+		#{filmId,jdbcType=SMALLINT}
+	</select>
+	<update id="update" parameterType="com.model.Film">
+		UPDATE film
+		SET
+		<if test="title != null">
+			title = #{title},
+		</if>
+		<if test="description != null">
+			description = #{description},
+		</if>
+		<if test="languageId != null">
+		    language_id = #{languageId}
+		</if>
+		<if test="languageId == null">
+		    language_id = 1
+		</if>
+		WHERE film_id = #{filmId}
+	</update>
+	<!-- Film 所有字段 -->
+	<sql id="Film_Column_List">
+		film_id,title,description,release_year,language_id,original_language_id,rental_duration,rental_rate,length,replacement_cost,
+		rating,special_features,last_update
+	</sql>
+	<insert id="insert" parameterType="com.model.Film" useGeneratedKeys="true" keyProperty="film_id">
+        INSERT INTO film (title, description, language_id)
+        VALUES (#{title}, #{description}, #{languageId});
+    </insert>
+	<select id="findFilmByTitleLike" parameterType="com.model.Film"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Film_Column_List" />
+		from film t where title like CONCAT('%', CONCAT(#{title}, '%'))
+		<if test="limitStart != null and limitEnd != null">
+			LIMIT ${limitStart},${limitEnd}
+		</if>
+	</select>
+	<select id="findFilmVoByTitleLike" parameterType="com.model.FilmVo"
+		resultMap="FilmVoResultMap">
+		select
+		  film_id,title,description,l.name language_name
+		from film t , language l where t.language_id = l.language_id and title like CONCAT('%', CONCAT(#{title}, '%'))
+		<if test="limitStart != null and limitEnd != null">
+			LIMIT ${limitStart},${limitEnd}
+		</if>
+	</select>
+</mapper>
