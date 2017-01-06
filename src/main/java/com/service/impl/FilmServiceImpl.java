@@ -82,6 +82,7 @@ public class FilmServiceImpl implements IFilmService {
 		if(film.getFilmId()!=null){
 			responseData.setTotal(1);
 		}else {
+			System.out.println(filmapper.selectCount(film));
 			responseData.setTotal(filmapper.selectCount(film));
 		}
 		return responseData;
@@ -95,6 +96,7 @@ public class FilmServiceImpl implements IFilmService {
 		if(film.getFilmId()!=null){
 			responseData.setTotal(1);
 		}else {
+			System.out.println(filmapper.selectCount(film));
 			responseData.setTotal(filmapper.selectCount(film));
 		}
 		return responseData;

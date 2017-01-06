@@ -35,6 +35,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<!--configLocation属性指定mybatis的核心配置文件 -->
 		<property name="configLocation" value="classpath:mybits/Configuration.xml" />
+		<property name="mapperLocations" value="classpath*:*Mapper.xml"></property>
 	</bean>
 	<!-- 配置扫描包，加载mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
