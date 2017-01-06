@@ -102,6 +102,9 @@
 		select
 		  film_id,title,description,l.name language_name
 		from film t , language l where t.language_id = l.language_id and title like CONCAT('%', CONCAT(#{title}, '%'))
+		<if test="strSqlOrderBy != null" >
+            order by ${strSqlOrderBy}
+		</if>
 		<if test="limitStart != null and limitEnd != null">
 			LIMIT ${limitStart},${limitEnd}
 		</if>

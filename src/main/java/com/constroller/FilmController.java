@@ -37,6 +37,7 @@ public class FilmController {
 		} else {
 			film.setTitle(filmTitle);
 		}
+		film.setStrSqlOrderBy("film_id");
 		film.setLimitStart(page);
 		film.setLimitEnd(pageSize);
 		ResponseData<FilmVo> query = filmService.queryFilmVo(film);

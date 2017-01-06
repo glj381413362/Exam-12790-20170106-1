@@ -16,13 +16,6 @@
 		<div class=" row clearfix">
 			<div class="form-horizontal" role="form">
 				<div class="col-md-3 column  ">
-					<div class="pagination form-group  center-block">
-						<label for="firstname" class=" col-sm-4 control-label">ID</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="filmId"
-								placeholder="请输入ID">
-						</div>
-					</div>
 				</div>
 				<div class="col-md-3 column">
 					<div class="pagination form-group">
@@ -177,7 +170,7 @@
                         $template.children('td').eq(1).text(item.film.title);
                         $template.children('td').eq(2).text(item.film.description);
                         $template.children('td').eq(3).text(item.language.name);
-                        $template.children('td').eq(4).html("<a onclick='deleteFilm(this)' value="+item.film.filmId+">删除</a><a href='"+getContextPath()+"/film/updateFilm.action?filmId="+item.film.filmId+"'>修改</a>");
+                        $template.children('td').eq(4).html("<a onclick='deleteFilm(this)' value="+item.film.filmId+">删除</a>&nbsp;<a href='"+getContextPath()+"/film/updateFilm.action?filmId="+item.film.filmId+"'>修改</a>");
                         $('#filmTable').append($template);
                     } 
                 }
