@@ -24,21 +24,22 @@
 					<tbody>
 						<tr>
 							<td>
-								<form class="form-horizontal" role="form" action="film/updateFilmSave.action">
-								<input type="hidden" id="langId" name="langId" />
-								<input type="hidden" id="filmId" name="film.filmId" />
+								<form class="form-horizontal" role="form"
+									action="film/updateFilmSave.action">
+									<input type="hidden" id="langId" name="langId" /> <input
+										type="hidden" id="filmId" name="film.filmId" />
 									<div class="form-group">
 										<label for="firstname" class="col-sm-4 control-label">Title</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="filmTitle" name="film.title"
-												placeholder="请输入Title">
+											<input type="text" class="form-control" id="filmTitle"
+												name="film.title" placeholder="请输入Title">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="lastname" class="col-sm-4 control-label">Description</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="description" name="film.description"
-												placeholder="请输入Description">
+											<input type="text" class="form-control" id="description"
+												name="film.description" placeholder="请输入Description">
 										</div>
 									</div>
 									<div class="form-group">
@@ -52,8 +53,10 @@
 
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-										<button type="button" onclick="cancle()" class="btn btn-default">取消</button>
-											<button type="button" onclick="sure()" class="btn btn-default">确定</button>
+											<button type="button" onclick="cancle()"
+												class="btn btn-default">取消</button>
+											<button type="button" onclick="sure()"
+												class="btn btn-default">确定</button>
 										</div>
 									</div>
 
@@ -68,7 +71,7 @@
 		<script type="text/javascript">
 			$('document').ready(function() {
 				var obj = {
-					url : "/Exam-12790-20170106-1/film/updateFilmAjax.action",
+					url : "/film/updateFilmAjax.action",
 					data : {
 						filmId : getUrlParam("filmId")
 					}
@@ -79,27 +82,15 @@
 				
 				$("#languagesSelect").change(function(){
 					$("#langId").attr('value',$("#languagesSelect option:selected").val());
-					console.log($("#languagesSelect option:selected").val());
 				})
 				
 			})
 			
 			function cancle(){
-				location.href = "http://localhost:8080/Exam-12790-20170106-1/index.html";
+				location.href = "index.html";
 			}
 			function sure(){
 			    $("#filmId").attr('value',getUrlParam("filmId"));
-				//回头修改 placeholder
-				/* alert($("#filmTitle").val().length==0);
-				if($("#filmTitle").val().length==0)
-				{
-					$("#filmTitle").val($("#filmTitle").attr('placeholder'));
-				}
-				if($("#description").val().length==0)
-				{
-					alert($("#description").attr('placeholder'));
-					$("#description").val($("#description").attr('placeholder'));
-				} */
 				$("form").submit();
 			}
 			
@@ -123,8 +114,15 @@
 							$("#description").attr('value',data.film.description);
 							$("#languagesSelect option").remove();//移除所以option
 							for(var obj of data.languages){
+								//设置原始的语言被选中
+								if(obj.languageId==data.film.languageId){
+								$("#languagesSelect").append("<option selected='selected' value='"+obj.languageId+"'>"+obj.name+"</option>");
+								$("#langId").attr('value',$("#languagesSelect option:selected").val());
+								}else{
 								$("#languagesSelect").append("<option value='"+obj.languageId+"'>"+obj.name+"</option>");
+								}
 							}
+							
 						} 
 					}
 				})

@@ -31,6 +31,7 @@ public class FilmController {
 			@RequestParam(name = "filmTitle", required = false, defaultValue = "") String filmTitle,
 			@RequestParam(name = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize) {
+		System.out.println(page+"  "+pageSize);
 		Film film = new Film();
 		if (filmId != 0) {
 			film.setFilmId((short) filmId);

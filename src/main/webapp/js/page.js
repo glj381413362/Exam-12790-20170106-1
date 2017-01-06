@@ -1,10 +1,7 @@
 (function($, global) {
 	$(document).ready(function() {
-		totalRecordNum = 21// 总记录条数(从java程序中获取)
+		totalRecordNum = 10// 总记录条数(从后台中获取)
 		currentPageNumber = 1;// 当前页号
-		// if (totalRecordNum == 0) {
-		// currentPageNumber = 0;
-		// }
 		perPageRecordNum = Number($('#pageSize').val());// 每页记录条数(js中设置)
 		// 计算总页数
 		totalPageNumber = Math.ceil(totalRecordNum / perPageRecordNum);

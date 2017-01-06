@@ -31,15 +31,11 @@
 		<result column="title" property="film.title" jdbcType="VARCHAR" />
 		<result column="description" property="film.description"
 			jdbcType="LONGVARBINARY" />
+		<result column="language_id" property="film.languageId" jdbcType="TINYINT" />
 		<result column="language_name" property="language.name"
 			jdbcType="VARCHAR" />
-		<collection property="languages" ofType="com.model.Language">
-			<id property="languageId" column="language_id" />
-			<result property="name" column="name" />
-		</collection>
+		
 	</resultMap>
-	<!-- <resultMap id="languageResultMap" type="com.model.Language"> <id property="languageId" 
-		column="language_id" /> <result property="name" column="name" /> </resultMap> -->
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
 		SET
 		FOREIGN_KEY_CHECKS = 0;
@@ -60,7 +56,7 @@
 	<select id="selectByPrimaryKey" resultMap="filmInfo"
 		parameterType="java.lang.Short">
 		select
-		film_id,title,description,l.`name` language_name
+		film_id,title,description,f.language_id language_id , l.`name` language_name
 		from film
 		f,`language` l where l.language_id=f.language_id
 		and film_id =

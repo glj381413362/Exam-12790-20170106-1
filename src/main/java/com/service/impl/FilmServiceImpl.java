@@ -22,11 +22,6 @@ public class FilmServiceImpl implements IFilmService {
 
 	@Autowired
 	private LanguageMapper languageMapper;
-	@Override
-	public int insertFullFilmService(Film entity) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int insertSelectiveService(Film film) {
@@ -34,11 +29,6 @@ public class FilmServiceImpl implements IFilmService {
 		return filmapper.insert(film);
 	}
 
-	@Override
-	public int insertBatchFilmService(List<Film> fList) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int deleteByPrimaryKeyService(Short filmId) {

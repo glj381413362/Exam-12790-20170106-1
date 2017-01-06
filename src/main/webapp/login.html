@@ -17,12 +17,6 @@
 <link href="css/login.min.css" rel="stylesheet">
 
 <script type="text/javascript">
-	/* var jq = jQuery.noConflict(); //自定义一个比较短快捷方式
-	 jq('document').ready(function () {
-	 if(jq.session.get('loginError')!=null){
-	 alert(jq.session.get('loginError'));
-	 }
-	 }); */
 	 function getContextPath() {
 		    var pathName = document.location.pathname;
 		    var index = pathName.substr(1).indexOf("/");
@@ -35,16 +29,16 @@
 			userName : $("#userName").val()
 		}
 		$.ajax({
-					url : "/Exam-12790-20170106-1/login.action",
+					url : "login.action",
 					type : "GET",
 					dataType : "json",
 					data : userInfo,
 					success : function(data) {
 						if (data == "succeed") {
-							location.href = "http://localhost:8080/Exam-12790-20170106-1/index.html";
+							location.href = "index.html";
 						} else {
 							alert(data);
-							location.href = "http://localhost:8080/Exam-12790-20170106-1/login.html";
+							location.href = "login.html";
 						}
 					}
 				})
@@ -65,14 +59,12 @@
 			</div>
 			<div class="col-sm-5">
 				<!-- <form method="post" action="login.action"> -->
-				<h4 class="no-margins">登录：</h4>
 				<p class="m-t-md">
 				<h3>登录服务</h3>
 				</p>
 				<input type="text" class="form-control uname" id="userName"
 					placeholder="用户名" /> <input type="password"
-					class="form-control pword m-b" name="pwd" placeholder="密码" /> <a
-					href="">忘记密码了？</a>
+					class="form-control pword m-b" name="pwd" placeholder="密码" />
 				<button class="btn btn-success btn-block" onclick="login()">登录</button>
 				<!-- </form> -->
 			</div>
@@ -82,5 +74,4 @@
 		</div>
 	</div>
 </body>
-<!-- <script src="js/page.js"></script> -->
 </html>

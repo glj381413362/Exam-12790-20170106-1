@@ -1,7 +1,5 @@
 package com.service.impl;
 
-import static org.springframework.util.Assert.notNull;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

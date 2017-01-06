@@ -69,18 +69,18 @@
 		<script type="text/javascript">
 		$('document').ready(function() {
 			var obj = {
-				url : "/Exam-12790-20170106-1/film/addFilmAjax.action",
+				url : "/film/addFilmAjax.action",
 			}
 			
 			//执行ajaxFun(obj)进行数据回显
 			ajaxFun(obj);
-			
+			$("#langId").attr('value','1');
 			$("#languagesSelect").change(function(){
 				$("#langId").attr('value',$("#languagesSelect option:selected").val());
 			})
 		})
 			function cancle() {
-				location.href = "http://localhost:8080/Exam-12790-20170106-1/index.html";
+				location.href = "index.html";
 			}
 			function sure() {
 				$("form").submit();

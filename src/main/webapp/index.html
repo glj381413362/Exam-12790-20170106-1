@@ -116,7 +116,7 @@
 	<script>  
 		function deleteFilm(obj){
 			$.ajax({
-				url : "/Exam-12790-20170106-1/film/deleteFilm.action",
+				url : "/film/deleteFilm.action",
 				type : "GET",
 				dataType : "json",
 				data : {
@@ -131,7 +131,7 @@
 			})
 		}
 		function addFilme(){
-			location.href = "http://localhost:8080/Exam-12790-20170106-1/addFilm.html";
+			location.href = "addFilm.html";
 		}
 		 function getContextPath() {
 			    var pathName = document.location.pathname;
@@ -140,17 +140,23 @@
 			    return result;
 			}
         function query(queryInfo) {
+        	var pages = 0;
+        	if(currentPageNumber==1){
+        		pages = currentPageNumber;
+        	}else{
+        		pages = (currentPageNumber-1)*perPageRecordNum
+        	}
             var defaultArg = {
                 filmId:0,
                 filmTitle: $("#filmTitle").val(),
-                page: currentPageNumber*perPageRecordNum,
+                page: pages,
                 pageSize: Number($('#pageSize').val())
             };
            
             
             queryInfo = $.extend({}, defaultArg, queryInfo);
             $.ajax({
-                url: "/Exam-12790-20170106-1/film/queryFilm.action",
+                url: "/film/queryFilm.action",
                 type: "GET",
                 dataType: "json",
                 data: queryInfo,
@@ -164,15 +170,14 @@
                 	$("#lastPage").text(totalPageNumber);
                     // total rows
                     $('#filmTable tbody').empty();
-                   /*  <a href='"+getContextPath()+"/film/deleteFilm.action?filmId="+item.filmId+"'>删除</a><a>修改</a> */
                     for (var item of data.rows) {
                         var $template = $($('#rowTemplate').html()).clone();
-                        $template.attr("id","filmTr"+item.filmId);
+                        $template.attr("id","filmTr"+item.film.filmId);
                         $template.children('td').eq(0).text(item.film.filmId);
                         $template.children('td').eq(1).text(item.film.title);
                         $template.children('td').eq(2).text(item.film.description);
                         $template.children('td').eq(3).text(item.language.name);
-                        $template.children('td').eq(4).html("<a onclick='deleteFilm(this)' value="+item.filmId+">删除</a><a href='"+getContextPath()+"/film/updateFilm.action?filmId="+item.filmId+"'>修改</a>");
+                        $template.children('td').eq(4).html("<a onclick='deleteFilm(this)' value="+item.film.filmId+">删除</a><a href='"+getContextPath()+"/film/updateFilm.action?filmId="+item.film.filmId+"'>修改</a>");
                         $('#filmTable').append($template);
                     } 
                 }

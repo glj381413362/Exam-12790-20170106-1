@@ -7,13 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import com.model.Film;
 
 public interface IBaseService<T,P> {
-	/**
-	 * @description 插入一个完整的Film 所有字段都不允许为空
-	 * @author 龚梁钧
-	 * @created 2016年12月22日 下午4:27:57
-	 * @param film
-	 */
-	public int insertFullFilmService(T entity);
 
 	/**
 	 * @description 插入Film 但是某些字段可以为空
@@ -24,7 +17,6 @@ public interface IBaseService<T,P> {
 	public int insertSelectiveService(T entity);
 	
 	
-	public int insertBatchFilmService(List<Film> fList);
 	
 	public int deleteByPrimaryKeyService(@Param("filmId") Short filmId);
 
